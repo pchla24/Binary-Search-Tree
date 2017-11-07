@@ -1,5 +1,9 @@
 package bst;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Tree {
 
 	private Node root; 
@@ -59,54 +63,6 @@ public class Tree {
 			this.insert(a[i]);
 	}
 	
-	public void delete(int key) {
-		
-		Node current = root;
-		Node parent = root;
-		boolean isLeftChild = true;
-		
-		while(current.iData != key) {
-			parent = current;
-			if(key < current.iData) {
-				isLeftChild = true;
-				current = current.leftChild;
-			}
-			else {
-				isLeftChild = false;
-				current = current.rightChild;
-
-			}
-			if(current == null) 
-				return;
-		}
-		
-		if(current.leftChild == null && current.rightChild == null) {	// bez potomków
-			if(current == root) 
-				root = null;
-			else if(isLeftChild)
-				parent.leftChild = null; 
-			else
-				parent.rightChild = null;
-		}
-		
-		else if(current.rightChild == null)			// brak prawego potomka
-			if(current == root)
-				root = current.leftChild;
-			else if(isLeftChild)
-				parent.leftChild = current.leftChild;
-			else
-				parent.rightChild = current.leftChild;
-		
-		else if(current.leftChild == null)			// brak lewego potomka
-			if(current == root)
-				root = current.rightChild;
-			else if(isLeftChild)
-				parent.leftChild = current.leftChild;
-			else
-				parent.rightChild = current.rightChild;
-		
-	}
-	
 	
 	private void inOrder(Node localRoot) {
 		
@@ -117,24 +73,35 @@ public class Tree {
 		}
 	}
 	
-	public Node minimum() {
-		Node current, last = null;
-		current = root; 
-		while(current != null) {
-			last = current; 
-			current = current.leftChild;
-		}
-		return last;
+	public boolean doBreadthFirstSearch(int id) {
+		
+		if(root.iData == id) {
+            System.out.println("Znaleziony - korzeñ");
+            return true;
+        }
+		
+		Queue<Node> queue = new LinkedList<>();
+        ArrayList<Node> explored = new ArrayList<>();
+        queue.add(root);
+        explored.add(root);
+        
+        while(!queue.isEmpty() ){
+            Node current = queue.remove();
+            if(current.iData == id) {
+                return true;
+            }
+            else {
+                if(current.getChildren().isEmpty()) {
+                	
+                }
+                    
+                else
+                    queue.addAll(current.getChildren());
+            }
+            explored.add(current);
+        }
+
+        return false;
 	}
-	
-	public Node maximum() {
-		Node current, last = null;
-		current = root; 
-		while(current != null) {
-			last = current; 
-			current = current.rightChild;
-		}
-		return last;
-	}
-	
+
 }

@@ -21,14 +21,22 @@ public class MainTree {
 			arr[i] = getRand(1, 100);
 		
 		theTree.insertArr(arr);
+
+		int id = 25;
 		
-		Node found = theTree.find(25);
+		Node found = theTree.find(id);							//szukanie optymalne
+		boolean foundBool = theTree.doBreadthFirstSearch(id);	//szukanie wszerz
 		
 		if(found != null) {
 			System.out.println("Znalaz³em wêze³ o id = 25");
 		}
 		else
 			System.out.println("Nie znalaz³em wêz³¹ o id = 25");
+		
+		if(foundBool)
+			System.out.println("Znalaz³em wêze³ o id = " + id);
+		else 
+			System.out.println("Nie znalaz³em wêz³a o id = " + id);
 	} 
 
 }
