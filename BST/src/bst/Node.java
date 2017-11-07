@@ -16,15 +16,14 @@ public class Node {
 	}
 	
 	public ArrayList<Node> getChildren(){
-        ArrayList<Node> childNodes = new ArrayList<>();
-        if(this.leftChild != null)
-        {
-            childNodes.add(leftChild);
-        }
-        if(this.rightChild != null) {
-            childNodes.add(rightChild);
-        }
-        return childNodes;
-    }
+		ArrayList<Node> childNodes = new ArrayList<>();
+		if(this.leftChild != null) {
+			childNodes.add(leftChild);
+		}
+		if(this.rightChild != null) {
+			childNodes.add(rightChild);
+		}
+		return childNodes;
+	}
 	
 }

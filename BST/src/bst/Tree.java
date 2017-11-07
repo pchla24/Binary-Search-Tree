@@ -76,32 +76,32 @@ public class Tree {
 	public boolean doBreadthFirstSearch(int id) {
 		
 		if(root.iData == id) {
-            System.out.println("Znaleziony - korzeñ");
-            return true;
-        }
+			System.out.println("Znaleziony - korzeñ");
+			return true;
+		}
 		
 		Queue<Node> queue = new LinkedList<>();
-        ArrayList<Node> explored = new ArrayList<>();
-        queue.add(root);
-        explored.add(root);
+		ArrayList<Node> explored = new ArrayList<>();
+		queue.add(root);
+		explored.add(root);
         
-        while(!queue.isEmpty() ){
-            Node current = queue.remove();
-            if(current.iData == id) {
-                return true;
-            }
-            else {
-                if(current.getChildren().isEmpty()) {
+		while(!queue.isEmpty() ){
+			Node current = queue.remove();
+			if(current.iData == id) {
+				return true;
+			}
+			else {
+				if(current.getChildren().isEmpty()) {
                 	
-                }
+				}
                     
-                else
-                    queue.addAll(current.getChildren());
-            }
-            explored.add(current);
-        }
+				else
+					queue.addAll(current.getChildren());
+			}
+			explored.add(current);
+		}
 
-        return false;
+		return false;
 	}
 
 }
