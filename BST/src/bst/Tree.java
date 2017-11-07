@@ -23,11 +23,10 @@ public class Tree {
 		return current; 
 	}
 	
-	public void insert(int id, double dd) {
+	public void insert(int id) {
 		
 		Node newNode = new Node(); 
 		newNode.iData = id; 
-		newNode.fData = dd;
 		
 		if(root==null) 
 			root = newNode;
@@ -53,6 +52,11 @@ public class Tree {
 				}
 			}
 		}
+	}
+	
+	public void insertArr(int[] a) {
+		for(int i=0; i<a.length; i++)
+			this.insert(a[i]);
 	}
 	
 	public void delete(int key) {
