@@ -3,20 +3,21 @@ package bst;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Tree {
 
-	private Node root; 
+	public Node root; 
 	
 	public Tree() {
 		root = null;
 	}
 	
-	public Node find(int key) {
+	public Node find(int id) {
 		
 		Node current = root;
-		while(current.iData != key) {
-			if(key < current.iData) 
+		while(current.iData != id) {
+			if(id < current.iData) 
 				current = current.leftChild;
 			else
 				current = current.rightChild; 
@@ -64,7 +65,7 @@ public class Tree {
 	}
 	
 	
-	private void inOrder(Node localRoot) {
+	public void inOrder(Node localRoot) {
 		
 		if(localRoot != null) {
 			inOrder(localRoot.leftChild);
@@ -73,12 +74,28 @@ public class Tree {
 		}
 	}
 	
-	public boolean doBreadthFirstSearch(int id) {
+	public void preOrder(Node localRoot) {
 		
-		if(root.iData == id) {
-			System.out.println("Znaleziony - korzeñ");
-			return true;
+		if(localRoot != null) {
+			System.out.print(localRoot.iData + " ");
+			preOrder(localRoot.leftChild);
+			preOrder(localRoot.rightChild);
 		}
+	}
+	
+	public void postOrder(Node localRoot) {
+		
+		if(localRoot != null) {
+			postOrder(localRoot.leftChild);
+			postOrder(localRoot.rightChild);
+			System.out.print(localRoot.iData + " ");
+		}
+	}
+	
+	public Node doBreadthFirstSearch(int id) {
+		
+		if(root.iData == id) 
+			return root;
 		
 		Queue<Node> queue = new LinkedList<>();
 		ArrayList<Node> explored = new ArrayList<>();
@@ -88,11 +105,11 @@ public class Tree {
 		while(!queue.isEmpty() ){
 			Node current = queue.remove();
 			if(current.iData == id) {
-				return true;
+				return current;
 			}
 			else {
 				if(current.getChildren().isEmpty()) {
-                	
+                	;
 				}
                     
 				else
@@ -101,7 +118,30 @@ public class Tree {
 			explored.add(current);
 		}
 
-		return false;
+		return null;
 	}
-
+	
+	public Node doDepthFirstSearch(int id) {
+		
+		if(root.iData == id) 
+			return root;
+		
+		Stack<Node> stack = new Stack<>();
+		stack.push(root);
+		while(!stack.isEmpty()) {
+			Node current = stack.pop();
+			if(current.iData == id)
+				return current;
+			else {
+				if(current.rightChild != null)
+					stack.push(current.rightChild);
+				if(current.leftChild != null)
+					stack.push(current.leftChild);
+			}
+		}
+		
+		return null;
+	
+	}
+	
 }
